@@ -1,4 +1,4 @@
-const { Sequelize } = require('sequelize');
+const { Sequelize, DataTypes } = require('sequelize');
 
 const sequelize = new Sequelize('postgres', 'postgres', 'postgres', {
     host: 'localhost',
@@ -15,3 +15,16 @@ async function conectar(){
 }
 
 conectar();
+
+const Usuario = sequelize.define('Usuario',{
+  email:{
+    type: DataTypes.STRING,
+    primaryKey: true
+  },
+  nome:{
+    type: DataTypes.STRING,
+    allowNull: false,
+    unique: true
+  }
+},{}
+);
