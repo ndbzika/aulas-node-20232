@@ -9,6 +9,17 @@ app.get('/usuarios', async function (req, res) {
   res.status(200).send(usuarios);
 });
 
+app.get('/usuarios/:email', async function(req,res){
+  const usuario = await Usuario.findByPk(req.params.email);
+
+  if(usuario){
+    res.status(200).send(usuario);
+  }else{
+    res.status(404).send('Usuário não encontrado');
+  }
+
+});
+
 app.post('/usuarios', async function (req, res){
   const usuario = Usuario.build(req.body);
   try{
