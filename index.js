@@ -30,4 +30,21 @@ app.post('/usuarios', async function (req, res){
   }
 });
 
+app.delete('/usuarios/:email', async function(req,res){
+  try{
+    const deletados = await Usuario.destroy({
+      where: {
+        email: req.params.email
+      }
+    });
+    if(deletados>0){
+      res.status(200).send('Usuário removido');
+    }else{
+      res.status(404).send('Usuário não encontrado');
+    }
+  }catch(error){
+    res.status(400).send('Falha ao deletar');
+  }
+});
+
 app.listen(3000);
