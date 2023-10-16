@@ -1,4 +1,5 @@
 const Usuario = require('../model/Usuario');
+const client = require('../database/redis');
 
 module.exports.listarUsuarios = async function (req, res) {
   const usuarios = await Usuario.findAll();
@@ -6,6 +7,7 @@ module.exports.listarUsuarios = async function (req, res) {
 };
 
 module.exports.buscarPorEmail = async function(req,res){
+  console.log(await client.ping());
   const usuario = await Usuario.findByPk(req.params.email);
 
   if(usuario){
